@@ -1,4 +1,3 @@
-# Xys Nova keys
-Arbuz
-Xysxa
-Fasol
+# format: KEY|userid|expires
+Arbuz|123456789|2025-12-31
+Xysxa|0|5555-08-15
