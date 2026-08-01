@@ -1,3 +1,4 @@
-# format: KEY|userid|expires
-Arbuz|123456789|2027-12-31
-Xysxa|0|2027-08-15
+# Xys Nova keys
+ABC-123-XYZ
+1
+Arubz
