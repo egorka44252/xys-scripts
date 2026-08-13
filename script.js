@@ -22,6 +22,7 @@ async function loadPacks() {
         }));
 
         renderPacks();
+        renderTracks();
         updateCartUI();
     } catch (err) {
         console.error(err);
@@ -71,10 +72,35 @@ function renderPacks(filter = 'all') {
     });
 }
 
+function renderTracks() {
+    const list = document.getElementById('tracks-list');
+    if (!list) return;
+
+    list.innerHTML = '';
+
+    packs.forEach(pack => {
+        const item = document.createElement('div');
+        item.className = 'track-item';
+        item.innerHTML = `
+            <button class="track-play" data-audio="${pack.audio}" onclick="togglePlay(this, event)">
+                <i class="fas fa-play"></i>
+            </button>
+            <div class="track-info">
+                <h4>${pack.title}</h4>
+                <div class="track-meta">${pack.genre}</div>
+            </div>
+            <div class="track-price">${pack.price.toLocaleString()} ₽</div>
+            <button class="btn track-buy" onclick="addToCart(${pack.id})">Купить</button>
+        `;
+        list.appendChild(item);
+    });
+}
+
 function togglePlay(btn, e) {
     e.stopPropagation();
     const audioSrc = btn.dataset.audio;
 
+    // Если уже играет этот же трек — останавливаем
     if (currentAudio && currentBtn === btn && !currentAudio.paused) {
         currentAudio.pause();
         btn.classList.remove('playing');
@@ -82,6 +108,7 @@ function togglePlay(btn, e) {
         return;
     }
 
+    // Останавливаем предыдущий
     if (currentAudio) {
         currentAudio.pause();
         if (currentBtn) {
@@ -90,6 +117,7 @@ function togglePlay(btn, e) {
         }
     }
 
+    // Создаём новый
     currentAudio = new Audio(audioSrc);
     currentBtn = btn;
 
@@ -211,5 +239,5 @@ function showToast(msg) {
     setTimeout(() => toast.remove(), 2200);
 }
 
-// Запускаем
+// Запуск
 loadPacks();
