@@ -1,4 +1,3 @@
-// Данные паков
 const packs = [
     {
         id: 1,
@@ -6,7 +5,8 @@ const packs = [
         genre: "trap",
         price: 1490,
         badge: "Хит",
-        icon: "fa-drum"
+        icon: "fa-drum",
+        audio: "bits/dark-trap.mp3"
     },
     {
         id: 2,
@@ -14,7 +14,8 @@ const packs = [
         genre: "drill",
         price: 1290,
         badge: "Новинка",
-        icon: "fa-bolt"
+        icon: "fa-bolt",
+        audio: "bits/uk-drill.mp3"
     },
     {
         id: 3,
@@ -22,7 +23,8 @@ const packs = [
         genre: "house",
         price: 990,
         badge: null,
-        icon: "fa-wave-square"
+        icon: "fa-wave-square",
+        audio: "bits/melodic-house.mp3"
     },
     {
         id: 4,
@@ -30,7 +32,8 @@ const packs = [
         genre: "presets",
         price: 790,
         badge: "Топ",
-        icon: "fa-sliders"
+        icon: "fa-sliders",
+        audio: "bits/serum-presets.mp3"
     },
     {
         id: 5,
@@ -38,7 +41,8 @@ const packs = [
         genre: "trap",
         price: 1190,
         badge: null,
-        icon: "fa-music"
+        icon: "fa-music",
+        audio: "bits/hard-trap.mp3"
     },
     {
         id: 6,
@@ -46,7 +50,8 @@ const packs = [
         genre: "drill",
         price: 1390,
         badge: "Хит",
-        icon: "fa-fire"
+        icon: "fa-fire",
+        audio: "bits/chicago-drill.mp3"
     },
     {
         id: 7,
@@ -54,7 +59,8 @@ const packs = [
         genre: "house",
         price: 890,
         badge: null,
-        icon: "fa-compact-disc"
+        icon: "fa-compact-disc",
+        audio: "bits/deep-house.mp3"
     },
     {
         id: 8,
@@ -62,41 +68,86 @@ const packs = [
         genre: "presets",
         price: 690,
         badge: "Скидка",
-        icon: "fa-keyboard"
+        icon: "fa-keyboard",
+        audio: "bits/sylenth1.mp3"
     }
 ];
 
 let cart = JSON.parse(localStorage.getItem('flCart')) || [];
+let currentAudio = null;
+let currentBtn = null;
 
-// Рендер паков
 function renderPacks(filter = 'all') {
     const grid = document.getElementById('packs-grid');
     grid.innerHTML = '';
 
-    const filtered = filter === 'all' 
-        ? packs 
-        : packs.filter(p => p.genre === filter);
+    const filtered = filter === 'all' ? packs : packs.filter(p => p.genre === filter);
 
     filtered.forEach(pack => {
         const card = document.createElement('div');
         card.className = 'pack-card';
         card.innerHTML = `
-            <div class="pack-image">
+            <div class="pack-preview">
                 ${pack.badge ? `<span class="pack-badge">${pack.badge}</span>` : ''}
-                <i class="fas ${pack.icon}"></i>
+                <i class="fas ${pack.icon} main-icon"></i>
+                <button class="play-btn" data-audio="${pack.audio}" onclick="togglePlay(this, event)">
+                    <i class="fas fa-play"></i>
+                </button>
             </div>
             <div class="pack-info">
                 <h3>${pack.title}</h3>
-                <div class="genre">${pack.genre.toUpperCase()}</div>
-                <div class="price">${pack.price.toLocaleString()} ₽</div>
-                <button class="btn" onclick="addToCart(${pack.id})">В корзину</button>
+                <div class="genre">${pack.genre}</div>
+                <div class="pack-bottom">
+                    <div class="price">${pack.price.toLocaleString()} ₽</div>
+                    <button class="btn btn-add" onclick="addToCart(${pack.id})">В корзину</button>
+                </div>
             </div>
         `;
         grid.appendChild(card);
     });
 }
 
-// Фильтры
+function togglePlay(btn, e) {
+    e.stopPropagation();
+    const audioSrc = btn.dataset.audio;
+
+    // Если уже играет этот же трек — останавливаем
+    if (currentAudio && currentBtn === btn && !currentAudio.paused) {
+        currentAudio.pause();
+        btn.classList.remove('playing');
+        btn.innerHTML = '<i class="fas fa-play"></i>';
+        return;
+    }
+
+    // Останавливаем предыдущий
+    if (currentAudio) {
+        currentAudio.pause();
+        if (currentBtn) {
+            currentBtn.classList.remove('playing');
+            currentBtn.innerHTML = '<i class="fas fa-play"></i>';
+        }
+    }
+
+    // Создаём новый
+    currentAudio = new Audio(audioSrc);
+    currentBtn = btn;
+
+    currentAudio.play().catch(err => {
+        console.log('Ошибка загрузки аудио:', err);
+        showToast('Не удалось загрузить превью');
+    });
+
+    btn.classList.add('playing');
+    btn.innerHTML = '<i class="fas fa-pause"></i>';
+
+    currentAudio.onended = () => {
+        btn.classList.remove('playing');
+        btn.innerHTML = '<i class="fas fa-play"></i>';
+        currentAudio = null;
+        currentBtn = null;
+    };
+}
+
 document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -105,7 +156,6 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     });
 });
 
-// Корзина
 function addToCart(id) {
     const pack = packs.find(p => p.id === id);
     const existing = cart.find(item => item.id === id);
@@ -118,7 +168,7 @@ function addToCart(id) {
 
     saveCart();
     updateCartUI();
-    showToast(`${pack.title} добавлен в корзину`);
+    showToast(`${pack.title} добавлен`);
 }
 
 function removeFromCart(id) {
@@ -139,7 +189,7 @@ function updateCartUI() {
     const totalEl = document.getElementById('cart-total');
 
     if (cart.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-muted); text-align: center;">Корзина пуста</p>';
+        container.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 40px;">Корзина пуста</p>';
         totalEl.textContent = '0';
         return;
     }
@@ -167,12 +217,12 @@ function toggleCart() {
 
 function checkout() {
     if (cart.length === 0) {
-        alert('Корзина пуста, брат');
+        alert('Корзина пуста');
         return;
     }
 
     const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-    alert(`Заказ на ${total.toLocaleString()} ₽ принят!\n\nВ реальном сайте здесь будет переход на оплату (ЮKassa / Crypto / Telegram бот).\n\nСпасибо за покупку, продюсер!`);
+    alert(`Заказ на ${total.toLocaleString()} ₽ принят!\n\nЗдесь будет оплата (ЮKassa / Crypto / Telegram).`);
     
     cart = [];
     saveCart();
@@ -190,16 +240,16 @@ function showToast(msg) {
         background: var(--accent);
         color: white;
         padding: 12px 24px;
-        border-radius: 8px;
+        border-radius: 10px;
         font-weight: 600;
         z-index: 3000;
-        animation: fadeIn 0.3s;
+        box-shadow: 0 10px 30px rgba(255,45,85,0.3);
     `;
     toast.textContent = msg;
     document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 2000);
+    setTimeout(() => toast.remove(), 2200);
 }
 
-// Инициализация
+// Старт
 renderPacks();
 updateCartUI();
