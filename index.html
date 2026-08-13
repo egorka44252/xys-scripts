@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FL Packs Store — Лучшие паки для FL Studio</title>
+    <title>FL Packs — Лучшие паки и биты</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+    <div class="bg-glow"></div>
+
     <header>
         <div class="container">
             <div class="logo">
-                <i class="fas fa-music"></i>
+                <i class="fas fa-waveform-lines"></i>
                 <span>FL PACKS</span>
             </div>
             <nav>
@@ -21,7 +23,7 @@
                 <a href="#contact">Контакты</a>
             </nav>
             <div class="cart-icon" onclick="toggleCart()">
-                <i class="fas fa-shopping-cart"></i>
+                <i class="fas fa-shopping-bag"></i>
                 <span id="cart-count">0</span>
             </div>
         </div>
@@ -29,9 +31,10 @@
 
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Лучшие паки для <span>FL Studio</span></h1>
-            <p>Готовые сэмплы, пресеты, MIDI и проекты от топовых продюсеров. Качай и делай хиты.</p>
-            <a href="#packs" class="btn">Смотреть паки</a>
+            <div class="badge">Новые паки каждую неделю</div>
+            <h1>Готовые биты и паки<br>для <span>FL Studio</span></h1>
+            <p>Качай, слушай превью и делай треки, которые взрывают чарты.</p>
+            <a href="#packs" class="btn">Смотреть каталог</a>
         </div>
     </section>
 
@@ -45,9 +48,7 @@
                 <button class="filter-btn" data-filter="house">House</button>
                 <button class="filter-btn" data-filter="presets">Пресеты</button>
             </div>
-            <div class="packs-grid" id="packs-grid">
-                <!-- Паки будут добавляться через JS -->
-            </div>
+            <div class="packs-grid" id="packs-grid"></div>
         </div>
     </section>
 
@@ -56,19 +57,19 @@
             <h2 class="section-title">Почему мы</h2>
             <div class="features">
                 <div class="feature">
-                    <i class="fas fa-bolt"></i>
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
                     <h3>Мгновенная доставка</h3>
-                    <p>Ссылка на скачивание сразу после оплаты</p>
+                    <p>Ссылка на скачивание приходит сразу после оплаты</p>
                 </div>
                 <div class="feature">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>100% лицензия</h3>
-                    <p>Все сэмплы можно использовать в коммерческих треках</p>
+                    <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+                    <h3>Полная лицензия</h3>
+                    <p>Все сэмплы можно использовать в коммерческих релизах</p>
                 </div>
                 <div class="feature">
-                    <i class="fas fa-headphones"></i>
+                    <div class="feature-icon"><i class="fas fa-headphones"></i></div>
                     <h3>Проверено в FL</h3>
-                    <p>Все паки протестированы в последней версии FL Studio</p>
+                    <p>Каждый пак протестирован в актуальной версии FL Studio</p>
                 </div>
             </div>
         </div>
@@ -78,7 +79,7 @@
         <div class="container">
             <h2 class="section-title">Связь</h2>
             <p>Вопросы по пакам? Пиши в Telegram: <a href="https://t.me/yourchannel" target="_blank">@yourchannel</a></p>
-            <p>Или на почту: <a href="mailto:packs@example.com">packs@example.com</a></p>
+            <p>Почта: <a href="mailto:packs@example.com">packs@example.com</a></p>
         </div>
     </section>
 
@@ -86,7 +87,7 @@
     <div class="cart-sidebar" id="cart-sidebar">
         <div class="cart-header">
             <h3>Корзина</h3>
-            <button onclick="toggleCart()"><i class="fas fa-times"></i></button>
+            <button onclick="toggleCart()"><i class="fas fa-xmark"></i></button>
         </div>
         <div class="cart-items" id="cart-items"></div>
         <div class="cart-footer">
@@ -98,7 +99,7 @@
 
     <footer>
         <div class="container">
-            <p>© 2026 FL Packs Store. Все права защищены. Сделано для настоящих продюсеров.</p>
+            <p>© 2026 FL Packs. Сделано для тех, кто делает музыку.</p>
         </div>
     </footer>
 
