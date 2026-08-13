@@ -1,87 +1,51 @@
-const packs = [
-    {
-        id: 1,
-        title: "Dark Trap Essentials",
-        genre: "trap",
-        price: 1490,
-        badge: "Хит",
-        icon: "fa-drum",
-        audio: "bits/dark-trap.mp3"
-    },
-    {
-        id: 2,
-        title: "UK Drill Kit Vol.3",
-        genre: "drill",
-        price: 1290,
-        badge: "Новинка",
-        icon: "fa-bolt",
-        audio: "bits/uk-drill.mp3"
-    },
-    {
-        id: 3,
-        title: "Melodic House Vibes",
-        genre: "house",
-        price: 990,
-        badge: null,
-        icon: "fa-wave-square",
-        audio: "bits/melodic-house.mp3"
-    },
-    {
-        id: 4,
-        title: "Serum Presets — Future Bass",
-        genre: "presets",
-        price: 790,
-        badge: "Топ",
-        icon: "fa-sliders",
-        audio: "bits/serum-presets.mp3"
-    },
-    {
-        id: 5,
-        title: "Hard Trap Drums",
-        genre: "trap",
-        price: 1190,
-        badge: null,
-        icon: "fa-music",
-        audio: "bits/hard-trap.mp3"
-    },
-    {
-        id: 6,
-        title: "Chicago Drill Pack",
-        genre: "drill",
-        price: 1390,
-        badge: "Хит",
-        icon: "fa-fire",
-        audio: "bits/chicago-drill.mp3"
-    },
-    {
-        id: 7,
-        title: "Deep House Starters",
-        genre: "house",
-        price: 890,
-        badge: null,
-        icon: "fa-compact-disc",
-        audio: "bits/deep-house.mp3"
-    },
-    {
-        id: 8,
-        title: "Sylenth1 — Night Drive",
-        genre: "presets",
-        price: 690,
-        badge: "Скидка",
-        icon: "fa-keyboard",
-        audio: "bits/sylenth1.mp3"
-    }
-];
-
+let packs = [];
 let cart = JSON.parse(localStorage.getItem('flCart')) || [];
 let currentAudio = null;
 let currentBtn = null;
+
+// Автоматически загружаем список паков из /bits/list.json
+async function loadPacks() {
+    try {
+        const response = await fetch('bits/list.json');
+        if (!response.ok) throw new Error('Не удалось загрузить list.json');
+        
+        const data = await response.json();
+        
+        packs = data.map((item, index) => ({
+            id: index + 1,
+            title: item.title,
+            genre: item.genre,
+            price: item.price,
+            badge: item.badge || null,
+            icon: item.icon || 'fa-music',
+            audio: `bits/${item.file}`
+        }));
+
+        renderPacks();
+        updateCartUI();
+    } catch (err) {
+        console.error(err);
+        document.getElementById('packs-grid').innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; color: #ff6b8a; padding: 40px;">
+                Не удалось загрузить паки.<br>
+                Проверь, что файл <b>bits/list.json</b> существует и написан правильно.
+            </div>
+        `;
+    }
+}
 
 function renderPacks(filter = 'all') {
     const grid = document.getElementById('packs-grid');
     grid.innerHTML = '';
 
-    const filtered = filter === 'all' ? packs : packs.filter(p => p.genre === filter);
+    const filtered = filter === 'all' 
+        ? packs 
+        : packs.filter(p => p.genre === filter);
+
+    if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color: var(--text-muted);">Ничего не найдено</div>`;
+        return;
+    }
 
     filtered.forEach(pack => {
         const card = document.createElement('div');
@@ -111,7 +75,6 @@ function togglePlay(btn, e) {
     e.stopPropagation();
     const audioSrc = btn.dataset.audio;
 
-    // Если уже играет этот же трек — останавливаем
     if (currentAudio && currentBtn === btn && !currentAudio.paused) {
         currentAudio.pause();
         btn.classList.remove('playing');
@@ -119,7 +82,6 @@ function togglePlay(btn, e) {
         return;
     }
 
-    // Останавливаем предыдущий
     if (currentAudio) {
         currentAudio.pause();
         if (currentBtn) {
@@ -128,12 +90,10 @@ function togglePlay(btn, e) {
         }
     }
 
-    // Создаём новый
     currentAudio = new Audio(audioSrc);
     currentBtn = btn;
 
-    currentAudio.play().catch(err => {
-        console.log('Ошибка загрузки аудио:', err);
+    currentAudio.play().catch(() => {
         showToast('Не удалось загрузить превью');
     });
 
@@ -158,8 +118,9 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 
 function addToCart(id) {
     const pack = packs.find(p => p.id === id);
-    const existing = cart.find(item => item.id === id);
+    if (!pack) return;
 
+    const existing = cart.find(item => item.id === id);
     if (existing) {
         existing.qty += 1;
     } else {
@@ -222,7 +183,7 @@ function checkout() {
     }
 
     const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-    alert(`Заказ на ${total.toLocaleString()} ₽ принят!\n\nЗдесь будет оплата (ЮKassa / Crypto / Telegram).`);
+    alert(`Заказ на ${total.toLocaleString()} ₽ принят!\n\nЗдесь будет оплата.`);
     
     cart = [];
     saveCart();
@@ -250,6 +211,5 @@ function showToast(msg) {
     setTimeout(() => toast.remove(), 2200);
 }
 
-// Старт
-renderPacks();
-updateCartUI();
+// Запускаем
+loadPacks();
