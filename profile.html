@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FL Zone — Мой профиль</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <h1>FL Zone</h1>
+        <span>для битмейкеров</span>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">Каталог</div>
+          <a href="dashboard.html" class="nav-item">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+            <span>Плагины</span>
+          </a>
+          <a href="dashboard.html" class="nav-item">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+            <span>Драм-киты</span>
+          </a>
+          <a href="dashboard.html" class="nav-item">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m2.828-9.9a9 9 0 0112.728 0"/></svg>
+            <span>Сэмплы</span>
+          </a>
+          <a href="dashboard.html" class="nav-item">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+            <span>MIDI</span>
+          </a>
+          <a href="dashboard.html" class="nav-item">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+            <span>Банки</span>
+          </a>
+          <a href="dashboard.html" class="nav-item">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+            <span>Пресеты</span>
+          </a>
+          <a href="dashboard.html" class="nav-item">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+            <span>Проекты</span>
+          </a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Сообщество</div>
+          <a href="dashboard.html" class="nav-item">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+            <span>Биты пользователей</span>
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+      <header class="topbar">
+        <div class="search-box">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" placeholder="Поиск..." disabled>
+        </div>
+        <div class="topbar-right">
+          <div class="account-btn" style="cursor:default">
+            <div class="account-avatar" id="avatarLetter">U</div>
+            <span class="account-name" id="userName">User</span>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="logoutBtn">Выйти</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <!-- Profile header -->
+        <div class="profile-header">
+          <div class="profile-avatar-lg" id="avatarLg">U</div>
+          <div class="profile-info">
+            <h2 id="profileName">User</h2>
+            <p id="profileEmail">email@example.com</p>
+            <div class="profile-stats">
+              <div class="stat">
+                <div class="stat-value" id="uploadsCount">0</div>
+                <div class="stat-label">Загрузок</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value" id="freeCount">0</div>
+                <div class="stat-label">Бесплатных</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value" id="paidCount">0</div>
+                <div class="stat-label">Платных</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upload form -->
+        <div class="upload-section">
+          <h3>Загрузить контент</h3>
+          <form class="upload-form" id="uploadForm">
+            <div class="form-group">
+              <label>Название</label>
+              <input type="text" id="uploadName" placeholder="Например: Dark Trap Kit Vol.1" required>
+            </div>
+            <div class="form-group">
+              <label>Тип контента</label>
+              <select id="uploadType" required>
+                <option value="beat">Бит</option>
+                <option value="drumkit">Драм-кит</option>
+                <option value="sample">Сэмпл / Луп</option>
+                <option value="midi">MIDI</option>
+                <option value="preset">Пресет</option>
+                <option value="project">Проект</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label>Описание</label>
+              <textarea id="uploadDesc" placeholder="Кратко расскажи про свой материал..."></textarea>
+            </div>
+            <div class="form-group full">
+              <label>Цена</label>
+              <div class="price-toggle">
+                <label class="price-option active" id="priceFree">
+                  <input type="radio" name="price" value="free" checked>
+                  🆓 Бесплатно
+                </label>
+                <label class="price-option" id="pricePaid">
+                  <input type="radio" name="price" value="paid">
+                  💰 Платно
+                </label>
+              </div>
+            </div>
+            <div class="form-group" id="priceAmountGroup" style="display:none">
+              <label>Сумма (₽)</label>
+              <input type="number" id="uploadPrice" placeholder="299" min="1">
+            </div>
+            <div class="form-group full">
+              <button type="submit" class="btn btn-primary">Загрузить</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- My uploads -->
+        <div class="my-uploads">
+          <h3>Мои загрузки</h3>
+          <div id="uploadsList">
+            <!-- filled by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // Auth check
+    let user = JSON.parse(localStorage.getItem('flzone_user') || 'null');
+    if (!user) {
+      window.location.href = 'index.html';
+    }
+
+    // UI helpers
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    function updateUserUI() {
+      document.getElementById('userName').textContent = user.nickname;
+      document.getElementById('avatarLetter').textContent = user.nickname.charAt(0).toUpperCase();
+      document.getElementById('avatarLg').textContent = user.nickname.charAt(0).toUpperCase();
+      document.getElementById('profileName').textContent = user.nickname;
+      document.getElementById('profileEmail').textContent = user.email;
+
+      const uploads = user.uploads || [];
+      document.getElementById('uploadsCount').textContent = uploads.length;
+      document.getElementById('freeCount').textContent = uploads.filter(u => u.price === 'free').length;
+      document.getElementById('paidCount').textContent = uploads.filter(u => u.price === 'paid').length;
+
+      renderUploads();
+    }
+
+    function renderUploads() {
+      const list = document.getElementById('uploadsList');
+      const uploads = user.uploads || [];
+
+      if (!uploads.length) {
+        list.innerHTML = `
+          <div class="empty-state">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+            <h3>Пока пусто</h3>
+            <p>Загрузи свой первый бит, драм-кит или сэмпл</p>
+          </div>
+        `;
+        return;
+      }
+
+      const icons = {
+        beat: '🎧', drumkit: '🥁', sample: '🎵',
+        midi: '🎼', preset: '🎛️', project: '📁'
+      };
+
+      list.innerHTML = uploads.map((up, i) => `
+        <div class="upload-item">
+          <div class="upload-item-icon">${icons[up.type] || '📦'}</div>
+          <div class="upload-item-info">
+            <h4>${up.name}</h4>
+            <p>${up.type} · ${up.price === 'free' ? 'Бесплатно' : up.amount + ' ₽'} · ${new Date(up.date).toLocaleDateString('ru-RU')}</p>
+          </div>
+          <div class="upload-item-actions">
+            <button class="btn btn-sm btn-danger" onclick="deleteUpload(${i})">Удалить</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function saveUser() {
+      localStorage.setItem('flzone_user', JSON.stringify(user));
+      // also update in users list
+      const users = JSON.parse(localStorage.getItem('flzone_users') || '[]');
+      const idx = users.findIndex(u => u.id === user.id);
+      if (idx !== -1) {
+        users[idx] = user;
+        localStorage.setItem('flzone_users', JSON.stringify(users));
+      }
+    }
+
+    // Price toggle
+    document.querySelectorAll('.price-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        document.querySelectorAll('.price-option').forEach(o => o.classList.remove('active'));
+        opt.classList.add('active');
+        opt.querySelector('input').checked = true;
+        document.getElementById('priceAmountGroup').style.display =
+          opt.querySelector('input').value === 'paid' ? 'block' : 'none';
+      });
+    });
+
+    // Upload form
+    document.getElementById('uploadForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('uploadName').value.trim();
+      const type = document.getElementById('uploadType').value;
+      const desc = document.getElementById('uploadDesc').value.trim();
+      const price = document.querySelector('input[name="price"]:checked').value;
+      const amount = price === 'paid' ? (document.getElementById('uploadPrice').value || 0) : 0;
+
+      if (!name) return;
+
+      if (!user.uploads) user.uploads = [];
+      user.uploads.unshift({
+        id: Date.now(),
+        name,
+        type,
+        desc,
+        price,
+        amount: Number(amount),
+        date: new Date().toISOString()
+      });
+
+      saveUser();
+      updateUserUI();
+      document.getElementById('uploadForm').reset();
+      document.getElementById('priceFree').classList.add('active');
+      document.getElementById('pricePaid').classList.remove('active');
+      document.getElementById('priceAmountGroup').style.display = 'none';
+      showToast('Контент успешно загружен!');
+    });
+
+    // Delete
+    window.deleteUpload = function(index) {
+      if (!confirm('Удалить эту загрузку?')) return;
+      user.uploads.splice(index, 1);
+      saveUser();
+      updateUserUI();
+      showToast('Удалено');
+    };
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('flzone_user');
+      window.location.href = 'index.html';
+    });
+
+    // Init
+    updateUserUI();
+  </script>
+</body>
+</html>
